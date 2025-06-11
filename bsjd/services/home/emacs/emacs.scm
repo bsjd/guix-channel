@@ -4,11 +4,19 @@
   #:use-module (gnu services configuration)
   #:use-module (gnu home services)
   #:use-module (gnu home services shepherd)
-  #:use-module (synnax services home utils)
   #:export (home-emacs-server-service-type
             home-emacs-server-configuration))
 
 (define package? file-like?)
+
+(define (home-service-log-file-path daemon-name)
+  "Given DAEMON-NAME as a string, return file path for the daemon's log file as
+a string. @env{XDG_LOG_HOME} is attempted first, and if it is not set, then the
+same path is constructed relative to @env{HOME}."
+  (format #f "~a/~a.log"
+          (or (getenv "XDG_LOG_HOME")
+              (format #f "~a/.local/var/log" (getenv "HOME")))
+          daemon-name))
 
 (define-configuration/no-serialization home-emacs-server-configuration
   (package (package emacs) "Emacs package to use in service.")
@@ -29,7 +37,7 @@
 
   (list
     (shepherd-service
-      (provision (list (server-name->symbol server-name))) ;; (server-name-suffix server-name))))
+      (provision (list (server-name->symbol server-name)))
     (requirement '(dbus))
     (respawn? #t)
     (start #~(make-forkexec-constructor
@@ -56,4 +64,4 @@
                                    home-shepherd-service-type
                                    home-emacs-server-service)))
                 (default-value #f)
-                (description "Run an `emacs' server as user daemon managed by Shepherd")))
+                (description "Run `emacs' server as user daemon managed by Shepherd")))
