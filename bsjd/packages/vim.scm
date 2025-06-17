@@ -1,4 +1,4 @@
-(define-module (bsjd packages neovim)
+(define-module (bsjd packages vim)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix packages)
   #:use-module (guix gexp)
@@ -45,16 +45,15 @@
   #:use-module (gnu packages shells)
   #:use-module (gnu packages tcl)
   #:use-module (gnu packages text-editors)
-  #:use-module (gnu packages textutils)
   #:use-module (gnu packages terminals)
   #:use-module (gnu packages tree-sitter)
   #:use-module (gnu packages xdisorg)
   #:use-module (gnu packages xorg))
 
-(define-public bsjd-neovim
+(define-public neovim
   (package
-    (name "bsjd-neovim")
-    (version "0.11.0")
+    (name "neovim")
+    (version "0.10.4")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -63,7 +62,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1z7xmngjr93dc52k8d3r6x0ivznpa8jbdrw24gqm16lg9gzvma02"))))
+                "95aaa8e89473f5421114f2787c13ae0ec6e11ebbd1a13a1bd6fcf63420f8073f"))))
     (build-system cmake-build-system)
     (arguments
      (list #:modules
@@ -120,7 +119,6 @@
                   msgpack
                   libtermkey
                   libvterm
-                  utf8proc
                   unibilium
                   jemalloc
                   (if (member (if (%current-target-system)
@@ -151,4 +149,3 @@ refactor Vim in order to:
     ;; Neovim is licensed under the terms of the Apache 2.0 license,
     ;; except for parts that were contributed under the Vim license.
     (license (list license:asl2.0 license:vim))))
-
