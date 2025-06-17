@@ -62,7 +62,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "95aaa8e89473f5421114f2787c13ae0ec6e11ebbd1a13a1bd6fcf63420f8073f"))))
+                "18kc310q7i4crk2g85day3jadb9l2dbmgirxhn53y4qmm5jk4h8h"))))
     (build-system cmake-build-system)
     (arguments
      (list #:modules
