@@ -45,7 +45,7 @@
   #:use-module (gnu packages shells)
   #:use-module (gnu packages tcl)
   #:use-module (gnu packages text-editors)
-  #:use-module (gnu packages text-utils)
+  #:use-module (gnu packages textutils)
   #:use-module (gnu packages terminals)
   #:use-module (gnu packages tree-sitter)
   #:use-module (gnu packages xdisorg)
