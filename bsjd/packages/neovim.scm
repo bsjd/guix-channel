@@ -1,4 +1,4 @@
-(define-module (bsjd packages)
+(define-module (bsjd packages neovim)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix packages)
   #:use-module (guix gexp)
