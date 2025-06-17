@@ -1,12 +1,12 @@
-(define-module (my-hello)
+(define-module (bsjd packages hello)
   #:use-module (guix licenses)
   #:use-module (guix packages)
   #:use-module (guix build-system gnu)
   #:use-module (guix download))
 
-(define-public my-hello
+(define-public bsjd-hello
   (package
-    (name "my-hello")
+    (name "bsjd-hello")
     (version "2.10")
     (source (origin
               (method url-fetch)

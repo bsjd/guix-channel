@@ -1,4 +1,4 @@
-(define-module (my-neovim)
+(define-module (bsjd packages)
   #:use-module ((guix licenses) #:prefix license:)
   #:use-module (guix packages)
   #:use-module (guix gexp)
@@ -51,9 +51,9 @@
   #:use-module (gnu packages xdisorg)
   #:use-module (gnu packages xorg))
 
-(define-public neovim
+(define-public bsjd-neovim
   (package
-    (name "my-neovim")
+    (name "bsjd-neovim")
     (version "0.11.0")
     (source (origin
               (method git-fetch)
