@@ -28,7 +28,7 @@
                                   version ".tar.gz"))
               (sha256
                (base32
-                "01ia9937dph8101x5qsgyn3xjsrmlhn1vpqr6xg1ff4dg3g483k5"))))
+                "08l0dbip4qgpjjy8723fb898gjl7z0m3ms11cb2iy4cwbf6fhbsg"))))
     (build-system gnu-build-system)
     (arguments
      `(#:tests? #f
