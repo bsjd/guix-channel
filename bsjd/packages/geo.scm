@@ -18,7 +18,7 @@
   #:use-module (gnu packages perl)
   #:use-module (gnu packages pkg-config))
 
-(define-public postgis-3.2.8
+(define-public postgis-3.3.8
   (package
     (name "postgis")
     (version "3.3.8")
