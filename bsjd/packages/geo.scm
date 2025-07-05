@@ -53,7 +53,7 @@
            libxml2
            openssl
            pcre
-           postgresql
+           postgresql-16
            protobuf-c
            proj))
     (native-inputs
