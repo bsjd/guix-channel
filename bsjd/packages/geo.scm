@@ -15,7 +15,7 @@
   #:use-module (gnu packages pcre)
   #:use-module (gnu packages databases)
   #:use-module (gnu packages protobuf)
-  #:use-module (gnu packages perl)
+  #:use-module (gnu packages perl))
 
 (define-public postgis-3.5.3
   (package
