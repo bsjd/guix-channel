@@ -18,10 +18,10 @@
   #:use-module (gnu packages perl)
   #:use-module (gnu packages pkg-config))
 
-(define-public postgis-3.5.3
+(define-public postgis-3.2.8
   (package
     (name "postgis")
-    (version "3.5.3")
+    (version "3.2.8")
     (source (origin
               (method url-fetch)
               (uri (string-append "https://download.osgeo.org/postgis/source/postgis-"
