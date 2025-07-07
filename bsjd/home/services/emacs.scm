@@ -1,4 +1,4 @@
-(define-module (bsjd services home emacs)
+(define-module (bsjd home services emacs)
   #:use-module (guix gexp)
   #:use-module (gnu packages emacs)
   #:use-module (gnu services configuration)
