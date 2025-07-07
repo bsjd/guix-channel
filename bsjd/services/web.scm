@@ -1,5 +1,6 @@
 (define-module (bsjd services web)
   #:use-module (guix gexp)
+  #:use-module (gnu services web)
   #:export (%nginx-deploy-hook
             adguard-nginx-config         adguard-certbot-config
             searxng-nginx-config         searxng-certbot-config
