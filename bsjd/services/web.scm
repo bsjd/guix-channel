@@ -7,6 +7,7 @@
             searxng-nginx-config         searxng-certbot-config
             grafana-nginx-config         grafana-certbot-config
             prometheus-nginx-config      prometheus-certbot-config
+            loki-nginx-config            loki-certbot-config
             portainer-nginx-config       portainer-certbot-config
             node-red-nginx-config        node-red-certbot-config
             home-assistant-nginx-config  home-assistant-certbot-config
