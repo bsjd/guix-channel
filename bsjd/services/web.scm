@@ -68,7 +68,7 @@
                       node-red-nginx-config node-red-certbot-config)
 (nginx-certbot-config "home-assistant.lan" "http://localhost:3007"
                       home-assistant-nginx-config home-assistant-certbot-config)
-(nginx-certbot-config "deemix"             "http://localhost:6595"
+(nginx-certbot-config "deemix.lan"         "http://localhost:6595"
                       deemix-nginx-config deemix-certbot-config)
 (nginx-certbot-config "syncthing.lan"      "http://localhost:8384"
                       syncthing-nginx-config syncthing-certbot-config)
