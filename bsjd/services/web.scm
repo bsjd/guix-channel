@@ -1,8 +1,24 @@
 (define-module (bsjd services web)
-  #:use-module (gnu services certbox)
-  #:use-module (gnu services web))
+  #:use-module (guix gexp)
+  #:export (%nginx-deploy-hook
+            adguard-nginx-config         adguard-certbot-config
+            searxng-nginx-config         searxng-certbot-config
+            grafana-nginx-config         grafana-certbot-config
+            prometheus-nginx-config      prometheus-certbot-config
+            portainer-nginx-config       portainer-certbot-config
+            node-red-nginx-config        node-red-certbot-config
+            home-assistant-nginx-config  home-assistant-certbot-config
+            deemix-nginx-config          deemix-certbot-config
+            syncthing-nginx-config       syncthing-certbot-config
+            fyt-nginx-config             fyt-certbot-config
+            fytcoach-nginx-config        fytcoach-certbot-config
+            cubetrek-nginx-config        cubetrek-certbot-config
+            endurain-nginx-config        endurain-certbot-config
+            auuki-nginx-config           auuki-certbot-config
+            pgadmin-nginx-config         pgadmin-certbot-config
+            org-roam-nginx-config        org-roam-certbot-config))
 
-(define-pubic %nginx-deploy-hook
+(define %nginx-deploy-hook
   (program-file "nginx-deploy-hook"
     #~(let ((pid (call-with-input-file "/var/run/nginx/pid" read)))
     (kill pid SIGHUP))))
@@ -11,7 +27,7 @@
   (syntax-rules ()
     ((_ domain host nginx-var certbot-var #:extra-config extra-config)
      (begin
-       (define-public nginx-var
+       (define nginx-var
          (nginx-server-configuration
            (server-name `(,domain))
            (listen '("443 ssl"))
@@ -23,7 +39,7 @@
                  (uri "/")
                  (body (append (list (string-append "proxy_pass " host ";")) extra-config)))))
            (raw-content extra-config)))
-       (define-public certbot-var
+       (define certbot-var
          (certificate-configuration
            (domains (list domain))
            (deploy-hook %nginx-deploy-hook)))))
