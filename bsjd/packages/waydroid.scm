@@ -167,7 +167,7 @@
                (commit version)))
         (file-name (git-file-name name version))
         (sha256
-          (base32 "0j90h3wr2pjz0b30ry151pxx0pbkjvml8myyzfz8wnr0cswg5s1d"))))
+          (base32 "050cn84ambjd02cnszp9qqgzm62x14jxg9jp7fxrzbv6qps8k2rb"))))
     (build-system gnu-build-system)
     (arguments
       (list #:make-flags
