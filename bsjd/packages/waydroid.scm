@@ -36,7 +36,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1zn0h9f8bd4kwqz33b8719r1wwbx790qvwl05w1yqrm0z270m6sh"))))
+                "1bkk4k79qw19p5j0w2iq6jywcsrg8d8ickx1905h5faf5dqkp7y2"))))
     (build-system gnu-build-system)
     (arguments
      (list #:make-flags #~(list (string-append "CC="
