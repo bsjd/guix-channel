@@ -3,86 +3,65 @@
   #:use-module (gnu services certbot)
   #:use-module (gnu services web)
   #:export (%nginx-deploy-hook
-            adguard-nginx-config         adguard-certbot-config
-            searxng-nginx-config         searxng-certbot-config
-            grafana-nginx-config         grafana-certbot-config
-            prometheus-nginx-config      prometheus-certbot-config
-            loki-nginx-config            loki-certbot-config
-            portainer-nginx-config       portainer-certbot-config
-            node-red-nginx-config        node-red-certbot-config
-            home-assistant-nginx-config  home-assistant-certbot-config
-            deemix-nginx-config          deemix-certbot-config
-            syncthing-nginx-config       syncthing-certbot-config
-            fyt-nginx-config             fyt-certbot-config
-            fytcoach-nginx-config        fytcoach-certbot-config
-            cubetrek-nginx-config        cubetrek-certbot-config
-            endurain-nginx-config        endurain-certbot-config
-            auuki-nginx-config           auuki-certbot-config
-            pgadmin-nginx-config         pgadmin-certbot-config
-            org-roam-nginx-config        org-roam-certbot-config))
+            adguard-nginx-config
+            searxng-nginx-config
+            grafana-nginx-config
+            prometheus-nginx-config
+            loki-nginx-config
+            portainer-nginx-config
+            node-red-nginx-config
+            home-assistant-nginx-config
+            deemix-nginx-config
+            syncthing-nginx-config
+            fyt-nginx-config
+            fytcoach-nginx-config
+            cubetrek-nginx-config
+            endurain-nginx-config
+            auuki-nginx-config
+            pgadmin-nginx-config
+            org-roam-nginx-config))
 
 (define %nginx-deploy-hook
   (program-file "nginx-deploy-hook"
     #~(let ((pid (call-with-input-file "/var/run/nginx/pid" read)))
     (kill pid SIGHUP))))
 
-(define-syntax nginx-certbot-config
+(define-syntax bsjd/nginx-config
   (syntax-rules ()
-    ((_ domain host nginx-var certbot-var #:extra-config extra-config)
+    ((_ domain host nginx-var #:extra-config extra-config)
      (begin
        (define nginx-var
          (nginx-server-configuration
            (server-name `(,domain))
            (listen '("443 ssl"))
-           (ssl-certificate (string-append "/etc/certs/" domain "/fullchain.pem"))
-           (ssl-certificate-key (string-append "/etc/certs/" domain "/privkey.pem"))
+           (ssl-certificate "/home/bart/.local/etc/certbot/live/lan.fytcoach.com/fullchain.pem")
+           (ssl-certificate-key "/home/bart/.local/etc/certbot/live/lan.fytcoach.com/privkey.pem")
            (locations
              (list
                (nginx-location-configuration
                  (uri "/")
                  (body (append (list (string-append "proxy_pass " host ";")) extra-config)))))
-           (raw-content extra-config)))
-       (define certbot-var
-         (certificate-configuration
-           (domains (list domain))
-           (deploy-hook %nginx-deploy-hook)))))
-    ((_ domain host nginx-var certbot-var)
-     (nginx-certbot-config domain host nginx-var certbot-var #:extra-config '()))))
+           (raw-content extra-config)))))
+    ((_ domain host nginx-var)
+     (bsjd/nginx-config domain host nginx-var #:extra-config '()))))
 
-(nginx-certbot-config "adguard.lan.fytcoach.com"        "http://localhost:3000"
-                      adguard-nginx-config adguard-certbot-config)
-(nginx-certbot-config "searxng.lan.fytcoach.com"        "http://localhost:3001"
-                      searxng-nginx-config searxng-certbot-config)
-(nginx-certbot-config "grafana.lan.fytcoach.com"        "http://localhost:3002"
-                      grafana-nginx-config grafana-certbot-config
+(bsjd/nginx-config "adguard.lan.fytcoach.com"        "http://localhost:3000" adguard-nginx-config)
+(bsjd/nginx-config "searxng.lan.fytcoach.com"        "http://localhost:3001" searxng-nginx-config)
+(bsjd/nginx-config "grafana.lan.fytcoach.com"        "http://localhost:3002" grafana-nginx-config
                       #:extra-config '("proxy_set_header Host $http_host;"))
-(nginx-certbot-config "prometheus.lan.fytcoach.com"     "http://localhost:3003"
-                      prometheus-nginx-config prometheus-certbot-config
+(bsjd/nginx-config "prometheus.lan.fytcoach.com"     "http://localhost:3003" prometheus-nginx-config
                       #:extra-config '("proxy_set_header Host $http_host;"))
-(nginx-certbot-config "loki.lan.fytcoach.com"           "http://localhost:3004"
-                      loki-nginx-config loki-certbot-config
+(bsjd/nginx-config "loki.lan.fytcoach.com"           "http://localhost:3004" loki-nginx-config
                       #:extra-config '("proxy_set_header Host $http_host;"))
-(nginx-certbot-config "portainer.lan.fytcoach.com"      "http://localhost:3005"
-                      portainer-nginx-config portainer-certbot-config)
-(nginx-certbot-config "node-red.lan.fytcoach.com"       "http://localhost:3006"
-                      node-red-nginx-config node-red-certbot-config)
-(nginx-certbot-config "home-assistant.lan.fytcoach.com" "http://localhost:3007"
-                      home-assistant-nginx-config home-assistant-certbot-config)
-(nginx-certbot-config "deemix.lan.fytcoach.com"         "http://localhost:6595"
-                      deemix-nginx-config deemix-certbot-config)
-(nginx-certbot-config "syncthing.lan.fytcoach.com"      "http://localhost:8384"
-                      syncthing-nginx-config syncthing-certbot-config)
-(nginx-certbot-config "fyt.lan.fytcoach.com"            "http://localhost:9000"
-                      fyt-nginx-config fyt-certbot-config)
-(nginx-certbot-config "fytcoach.lan.fytcoach.com"       "http://localhost:9001"
-                      fytcoach-nginx-config fytcoach-certbot-config)
-(nginx-certbot-config "cubetrek.lan.fytcoach.com"       "http://localhost:9002"
-                      cubetrek-nginx-config cubetrek-certbot-config)
-(nginx-certbot-config "endurain.lan.fytcoach.com"       "http://localhost:9003"
-                      endurain-nginx-config endurain-certbot-config)
-(nginx-certbot-config "auuki.lan.fytcoach.com"          "http://localhost:9004"
-                      auuki-nginx-config auuki-certbot-config)
-(nginx-certbot-config "pgadmin.lan.fytcoach.com"        "http://localhost:9876"
-                      pgadmin-nginx-config pgadmin-certbot-config)
-(nginx-certbot-config "org-roam.lan.fytcoach.com"       "http://localhost:35901"
-                      org-roam-nginx-config org-roam-certbot-config)
+(bsjd/nginx-config "portainer.lan.fytcoach.com"      "http://localhost:3005" portainer-nginx-config)
+(bsjd/nginx-config "node-red.lan.fytcoach.com"       "http://localhost:3006" node-red-nginx-config)
+(bsjd/nginx-config "home-assistant.lan.fytcoach.com" "http://localhost:3007" home-assistant-nginx-config)
+(bsjd/nginx-config "deemix.lan.fytcoach.com"         "http://localhost:6595" deemix-nginx-config)
+(bsjd/nginx-config "syncthing.lan.fytcoach.com"      "http://localhost:8384" syncthing-nginx-config)
+(bsjd/nginx-config "fyt.lan.fytcoach.com"            "http://localhost:9000" fyt-nginx-config)
+(bsjd/nginx-config "fytcoach.lan.fytcoach.com"       "http://localhost:9001" fytcoach-nginx-config)
+(bsjd/nginx-config "cubetrek.lan.fytcoach.com"       "http://localhost:9002" cubetrek-nginx-config)
+(bsjd/nginx-config "endurain.lan.fytcoach.com"       "http://localhost:9003" endurain-nginx-config)
+(bsjd/nginx-config "auuki.lan.fytcoach.com"          "http://localhost:9004" auuki-nginx-config)
+(bsjd/nginx-config "pgadmin.lan.fytcoach.com"        "http://localhost:9876" pgadmin-nginx-config)
+(bsjd/nginx-config "org-roam.lan.fytcoach.com"       "http://localhost:35901" org-roam-nginx-config)
