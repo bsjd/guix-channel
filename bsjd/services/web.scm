@@ -48,7 +48,7 @@
 
 (bsjd/nginx-config "adguard.lan"        "http://localhost:3053" adguard-nginx-config)
 (bsjd/nginx-config "searxng.lan"        "http://localhost:3001" searxng-nginx-config)
-(bsjd/nginx-config "music.lan"          "http://localhost:3001" music-nginx-config)
+(bsjd/nginx-config "music.lan"          "http://localhost:6666" music-nginx-config)
 (bsjd/nginx-config "grafana.lan"        "http://localhost:3002" grafana-nginx-config
   #:extra-config '("proxy_set_header Host $http_host;"))
 (bsjd/nginx-config "prometheus.lan"     "http://localhost:3003" prometheus-nginx-config
