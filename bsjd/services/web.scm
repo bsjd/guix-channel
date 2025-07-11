@@ -58,7 +58,8 @@
 (bsjd/nginx-config "portainer.lan"      "http://localhost:3005" portainer-nginx-config)
 (bsjd/nginx-config "node-red.lan"       "http://localhost:3006" node-red-nginx-config)
 (bsjd/nginx-config "home-assistant.lan" "http://localhost:3007" home-assistant-nginx-config)
-(bsjd/nginx-config "deemix.lan"         "http://localhost:6595" deemix-nginx-config)
+(bsjd/nginx-config "deemix.lan"         "http://localhost:6595" deemix-nginx-config
+  #:extra-config '("proxy_set_header Host $http_host;"))
 (bsjd/nginx-config "syncthing.lan"      "http://localhost:8384" syncthing-nginx-config)
 (bsjd/nginx-config "fyt.lan"            "http://localhost:9000" fyt-nginx-config)
 (bsjd/nginx-config "fytcoach.lan"       "http://localhost:9001" fytcoach-nginx-config)
