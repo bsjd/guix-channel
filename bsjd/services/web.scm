@@ -33,7 +33,7 @@
      (begin
        (define nginx-var
          (nginx-server-configuration
-           (server-name `(,domain))
+           (server-name `(,(string-append domain ".fytcoach.com") ,domain))
            (listen '("443 ssl"))
            (ssl-certificate "/etc/certs/lan.fytcoach.com/fullchain.pem")
            (ssl-certificate-key "/etc/certs/lan.fytcoach.com/privkey.pem")
@@ -46,24 +46,24 @@
     ((_ domain host nginx-var)
      (bsjd/nginx-config domain host nginx-var #:extra-config '()))))
 
-(bsjd/nginx-config "adguard.lan.fytcoach.com"        "http://localhost:3000" adguard-nginx-config)
-(bsjd/nginx-config "searxng.lan.fytcoach.com"        "http://localhost:3001" searxng-nginx-config)
-(bsjd/nginx-config "music.lan.fytcoach.com"          "http://localhost:3001" music-nginx-config)
-(bsjd/nginx-config "grafana.lan.fytcoach.com"        "http://localhost:3002" grafana-nginx-config
-                      #:extra-config '("proxy_set_header Host $http_host;"))
-(bsjd/nginx-config "prometheus.lan.fytcoach.com"     "http://localhost:3003" prometheus-nginx-config
-                      #:extra-config '("proxy_set_header Host $http_host;"))
-(bsjd/nginx-config "loki.lan.fytcoach.com"           "http://localhost:3004" loki-nginx-config
-                      #:extra-config '("proxy_set_header Host $http_host;"))
-(bsjd/nginx-config "portainer.lan.fytcoach.com"      "http://localhost:3005" portainer-nginx-config)
-(bsjd/nginx-config "node-red.lan.fytcoach.com"       "http://localhost:3006" node-red-nginx-config)
-(bsjd/nginx-config "home-assistant.lan.fytcoach.com" "http://localhost:3007" home-assistant-nginx-config)
-(bsjd/nginx-config "deemix.lan.fytcoach.com"         "http://localhost:6595" deemix-nginx-config)
-(bsjd/nginx-config "syncthing.lan.fytcoach.com"      "http://localhost:8384" syncthing-nginx-config)
-(bsjd/nginx-config "fyt.lan.fytcoach.com"            "http://localhost:9000" fyt-nginx-config)
-(bsjd/nginx-config "fytcoach.lan.fytcoach.com"       "http://localhost:9001" fytcoach-nginx-config)
-(bsjd/nginx-config "cubetrek.lan.fytcoach.com"       "http://localhost:9002" cubetrek-nginx-config)
-(bsjd/nginx-config "endurain.lan.fytcoach.com"       "http://localhost:9003" endurain-nginx-config)
-(bsjd/nginx-config "auuki.lan.fytcoach.com"          "http://localhost:9004" auuki-nginx-config)
-(bsjd/nginx-config "pgadmin.lan.fytcoach.com"        "http://localhost:9876" pgadmin-nginx-config)
-(bsjd/nginx-config "org-roam.lan.fytcoach.com"       "http://localhost:35901" org-roam-nginx-config)
+(bsjd/nginx-config "adguard.lan"        "http://localhost:3000" adguard-nginx-config)
+(bsjd/nginx-config "searxng.lan"        "http://localhost:3001" searxng-nginx-config)
+(bsjd/nginx-config "music.lan"          "http://localhost:3001" music-nginx-config)
+(bsjd/nginx-config "grafana.lan"        "http://localhost:3002" grafana-nginx-config
+  #:extra-config '("proxy_set_header Host $http_host;"))
+(bsjd/nginx-config "prometheus.lan"     "http://localhost:3003" prometheus-nginx-config
+  #:extra-config '("proxy_set_header Host $http_host;"))
+(bsjd/nginx-config "loki.lan"           "http://localhost:3004" loki-nginx-config
+  #:extra-config '("proxy_set_header Host $http_host;"))
+(bsjd/nginx-config "portainer.lan"      "http://localhost:3005" portainer-nginx-config)
+(bsjd/nginx-config "node-red.lan"       "http://localhost:3006" node-red-nginx-config)
+(bsjd/nginx-config "home-assistant.lan" "http://localhost:3007" home-assistant-nginx-config)
+(bsjd/nginx-config "deemix.lan"         "http://localhost:6595" deemix-nginx-config)
+(bsjd/nginx-config "syncthing.lan"      "http://localhost:8384" syncthing-nginx-config)
+(bsjd/nginx-config "fyt.lan"            "http://localhost:9000" fyt-nginx-config)
+(bsjd/nginx-config "fytcoach.lan"       "http://localhost:9001" fytcoach-nginx-config)
+(bsjd/nginx-config "cubetrek.lan"       "http://localhost:9002" cubetrek-nginx-config)
+(bsjd/nginx-config "endurain.lan"       "http://localhost:9003" endurain-nginx-config)
+(bsjd/nginx-config "auuki.lan"          "http://localhost:9004" auuki-nginx-config)
+(bsjd/nginx-config "pgadmin.lan"        "http://localhost:9876" pgadmin-nginx-config)
+(bsjd/nginx-config "org-roam.lan"       "http://localhost:35901" org-roam-nginx-config)
