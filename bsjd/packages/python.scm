@@ -1,0 +1,37 @@
+(define-module (bsjd packages python)
+  #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (guix build-system gnu)
+  #:use-module (guix download)
+  #:use-module (guix gexp)
+  #:use-module (guix git-download)
+  #:use-module (guix packages)
+  #:use-module (guix utils)
+  #:use-module (gnu packages)
+  #:use-module (gnu packages geo)
+  #:use-module (gnu packages image)
+  #:use-module (gnu packages web)
+  #:use-module (gnu packages xml)
+  #:use-module (gnu packages tls)
+  #:use-module (gnu packages pcre)
+  #:use-module (gnu packages databases)
+  #:use-module (gnu packages protobuf)
+  #:use-module (gnu packages perl)
+  #:use-module (gnu packages pkg-config))
+
+(define-public python-certbot-dns-cloudflare
+  (package
+    (name "python-certbot-dns-cloudflare")
+    (version "4.1.1")
+    (source
+     (origin
+       (method url-fetch)
+       (uri (pypi-uri "certbot_dns_cloudflare" version))
+       (sha256
+        (base32 "0ah09n4shv0c2bdbqhql3pvkijglbdwv13qx6i09p468p8pfjhmb"))))
+    (build-system pyproject-build-system)
+    (propagated-inputs (list python-acme python-certbot python-cloudflare))
+    (native-inputs (list python-pytest python-setuptools python-wheel))
+    (home-page "https://github.com/certbot/certbot")
+    (synopsis "Cloudflare DNS Authenticator plugin for Certbot")
+    (description "Cloudflare DNS Authenticator plugin for Certbot.")
+    (license #f)))
