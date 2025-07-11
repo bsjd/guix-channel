@@ -5,6 +5,7 @@
   #:export (%nginx-deploy-hook
             adguard-nginx-config
             searxng-nginx-config
+            music-nginx-config
             grafana-nginx-config
             prometheus-nginx-config
             loki-nginx-config
@@ -34,8 +35,8 @@
          (nginx-server-configuration
            (server-name `(,domain))
            (listen '("443 ssl"))
-           (ssl-certificate "/home/bart/.local/etc/certbot/live/lan.fytcoach.com/fullchain.pem")
-           (ssl-certificate-key "/home/bart/.local/etc/certbot/live/lan.fytcoach.com/privkey.pem")
+           (ssl-certificate "/etc/certs/lan.fytcoach.com/fullchain.pem")
+           (ssl-certificate-key "/etc/certs/lan.fytcoach.com/privkey.pem")
            (locations
              (list
                (nginx-location-configuration
@@ -47,6 +48,7 @@
 
 (bsjd/nginx-config "adguard.lan.fytcoach.com"        "http://localhost:3000" adguard-nginx-config)
 (bsjd/nginx-config "searxng.lan.fytcoach.com"        "http://localhost:3001" searxng-nginx-config)
+(bsjd/nginx-config "music.lan.fytcoach.com"          "http://localhost:3001" music-nginx-config)
 (bsjd/nginx-config "grafana.lan.fytcoach.com"        "http://localhost:3002" grafana-nginx-config
                       #:extra-config '("proxy_set_header Host $http_host;"))
 (bsjd/nginx-config "prometheus.lan.fytcoach.com"     "http://localhost:3003" prometheus-nginx-config
