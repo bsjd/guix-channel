@@ -46,7 +46,7 @@
     ((_ domain host nginx-var)
      (bsjd/nginx-config domain host nginx-var #:extra-config '()))))
 
-(bsjd/nginx-config "adguard.lan"        "http://localhost:3000" adguard-nginx-config)
+(bsjd/nginx-config "adguard.lan"        "http://localhost:3053" adguard-nginx-config)
 (bsjd/nginx-config "searxng.lan"        "http://localhost:3001" searxng-nginx-config)
 (bsjd/nginx-config "music.lan"          "http://localhost:3001" music-nginx-config)
 (bsjd/nginx-config "grafana.lan"        "http://localhost:3002" grafana-nginx-config
