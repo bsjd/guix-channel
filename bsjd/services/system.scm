@@ -5,13 +5,13 @@
   #:use-module (gnu services admin)
   #:use-module (gnu services dbus)
   #:use-module (gnu services shepherd)
-  #:use-module (nongnu packages firmware))
+  #:use-module (gnu packages firmware))
 
 (define-record-type* <fwupd-configuration>
   fwupd-configuration make-fwupd-configuration
   fwupd-configuration?
   (fwupd fwupd-configuration-fwupd
-         (default fwupd-nonfree)))
+         (default fwupd)))
 
 (define (fwupd-activation config)
     (with-imported-modules '((guix build utils))
