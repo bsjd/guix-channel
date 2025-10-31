@@ -1,4 +1,4 @@
-(define-module (bsjd home services system)
+(define-module (bsjd services system)
   #:use-module (guix gexp)
   #:use-module (guix records)
   #:use-module (gnu services)
