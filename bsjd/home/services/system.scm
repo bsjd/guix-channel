@@ -1,4 +1,4 @@
-(define-module (bsjd services system)
+(define-module (bsjd home services system)
   #:use-module (gnu services)
   #:use-module (gnu services admin)
   #:use-module (gnu services dbus)
