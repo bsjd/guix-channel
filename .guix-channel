@@ -1,7 +1,6 @@
 ;; -*- mode: scheme; -*-
 (channel
  (version 0) ; file format version
- (url "git@github.com:bsjd/guix-channel.git")
  (dependencies
   (channel
    (name nonguix)
