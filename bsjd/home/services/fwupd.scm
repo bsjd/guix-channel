@@ -14,7 +14,6 @@
             fwupd-configuration?
             fwupd-configuration-fields
             fwupd-configuration-fwupd
-
             fwupd-service-type))
 
 (define-configuration/no-serialization fwupd-configuration

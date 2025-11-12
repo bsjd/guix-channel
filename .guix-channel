@@ -2,7 +2,7 @@
 (channel
  (version 0)                            ;file format version
  (news-file "etc/news.txt")
- (url "https://codeberg.org/fishinthecalculator/small-guix.git")
+ (url "https://github.com/bsjd/guix-config.git")
  (dependencies
   (channel
    (name nonguix)
