@@ -18,7 +18,7 @@
 
 (define-configuration/no-serialization fwupd-configuration
   (fwupd
-    (package fwupd)
+    (package fwupd-nonfree)
     "The fwupd package that will be installed in the system profile."))
 
 (define (fwupd-activation config)
