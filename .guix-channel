@@ -1,8 +1,7 @@
 ;; -*- mode: scheme; -*-
 (channel
- (version 0)                            ;file format version
- (news-file "etc/news.txt")
- (url "https://github.com/bsjd/guix-config.git")
+ (version 0) ; file format version
+ (url "git@github.com:bsjd/guix-channel.git")
  (dependencies
   (channel
    (name nonguix)
