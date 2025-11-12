@@ -1,7 +1,7 @@
 ;;; SPDX-License-Identifier: GPL-3.0-or-later
 ;;; Copyright © 2024 Giacomo Leidi <therewasa@fishinthecalculator.me>
 
-(define-module (bsjd home services fwupd)
+(define-module (bsjd services fwupd)
   #:use-module (gnu packages firmware)
   #:use-module (gnu services)
   #:use-module (gnu services configuration)
