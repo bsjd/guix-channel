@@ -13,7 +13,7 @@
       (origin
         (method url-fetch)
         (uri
-          "https://github.com/DetachHead/basedpyright/releases/download/v1.33.0/basedpyright-1.33.0.tar.gz"
+          "https://github.com/DetachHead/basedpyright/releases/download/v1.33.0/basedpyright-1.33.0.tar.gz")
         (sha256
           (base32 "0fi43rrrl3819hfizflnxzkxn2n0bc6ljx8wr70di4sv539ddr57"))))
     (build-system node-build-system)
@@ -32,9 +32,7 @@
                                                     "webpack-cli"
                                                     "esbuild-loader"
                                                     "copy-webpack-plugin"))))))))
-      (home-page "https://github.com/detachhead/basedpyright#readme")
-      (synopsis
-      "a fork of pyright with various type checking improvements, pylance features and more.")
-      (description
-      "a fork of pyright with various type checking improvements, pylance features and more.")
-      (license expat)))
+    (home-page "https://github.com/detachhead/basedpyright#readme")
+    (synopsis "a fork of pyright with various type checking improvements, pylance features and more.")
+    (description "a fork of pyright with various type checking improvements, pylance features and more.")
+    (license expat)))
