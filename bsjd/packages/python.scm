@@ -12,10 +12,9 @@
     (source
       (origin
         (method url-fetch)
-        (uri
-          "https://github.com/DetachHead/basedpyright/releases/download/v1.33.0/basedpyright-1.33.0.tar.gz")
+        (uri "https://registry.npmjs.org/basedpyright/-/basedpyright-1.33.0.tgz")
         (sha256
-          (base32 "0fi43rrrl3819hfizflnxzkxn2n0bc6ljx8wr70di4sv539ddr57"))))
+          (base32 "0b45b9jbcxx8di4xg9q3xn559sm1jk4w0r7q0h3csxrnsl3j0ajs"))))
     (build-system node-build-system)
     (arguments
       (list
