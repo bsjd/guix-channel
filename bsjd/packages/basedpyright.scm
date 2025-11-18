@@ -1,13 +1,13 @@
-(define-module (bsjd packages basedpyright)
+(define-module (bsjd packages python)
   #:use-module (guix packages)
   #:use-module (guix download)
   #:use-module (guix build-system node)
   #:use-module (guix gexp)
   #:use-module (guix licenses))
 
-(define-public node-basedpyright-1.33.0
+(define-public basedpyright
   (package
-    (name "node-basedpyright")
+    (name "basedpyright")
     (version "1.33.0")
     (source
       (origin
