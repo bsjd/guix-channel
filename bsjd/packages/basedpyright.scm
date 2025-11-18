@@ -38,4 +38,3 @@
       (description
       "a fork of pyright with various type checking improvements, pylance features and more.")
       (license expat)))
-node-basedpyright-1.33.0
