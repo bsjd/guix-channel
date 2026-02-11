@@ -64,7 +64,7 @@
 (define-public edk2-tools
   (package
     (name "edk2-tools")
-    (version "202511")
+    (version "202402")
     (source (origin
               (method git-fetch)
               (uri (git-reference
