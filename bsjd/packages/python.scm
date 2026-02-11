@@ -14,7 +14,7 @@
         (method url-fetch)
         (uri "https://registry.npmjs.org/basedpyright/-/basedpyright-1.36.2.tgz")
         (sha256
-          (base32 "1dq7y6kvvjsk2n8g5pifvibg90agiy025d9yqpk28pxjsa60z9ih"))))
+          (base32 "1xwdif6i2yq9cdi7s2bqy1nm4ayayd8s4cp5g6c8qxlq77dyxzx2"))))
     (build-system node-build-system)
     (arguments
       (list
