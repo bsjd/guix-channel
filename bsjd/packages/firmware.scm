@@ -272,16 +272,16 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
                         ;(41-edk2-ovmf-2m-raw-x64-sb.json-dest (string-append #$output "/share/qemu/firmware/41-edk2-ovmf-2m-raw-x64-sb.json")))
                     (mkdir-p fmw)
                     (mkdir-p (dirname 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest))
-                    ;  (mkdir-p (dirname 41-edk2-ovmf-2m-raw-x64-sb.json-dest))
+                    (mkdir-p (dirname 41-edk2-ovmf-2m-raw-x64-sb.json-dest))
                     (copy-file 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-source
                                31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest)
-                    ; (copy-file 41-edk2-ovmf-2m-raw-x64-sb.json-source
-                    ;            41-edk2-ovmf-2m-raw-x64-sb.json-dest)
-                    ; (substitute* 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest
-                    ;   (("/usr/share/edk2/ovmf/OVMF_(CODE|VARS).secboot.fd" _ kind)
-                    ;    (string-append #$output "/share/firmware/ovmf_" (string-downcase kind) "_x64.secboot.bin")))
-                    ; (substitute* 41-edk2-ovmf-2m-raw-x64-sb.json-dest
-                    ;   (("/usr/share/edk2/ovmf/OVMF_{CODE|VARS}.secboot.fd" _ kind)
-                    ;    (string-append #$output "/share/firmware/ovmf_code_x64.secboot.bin")))
+                    (copy-file 41-edk2-ovmf-2m-raw-x64-sb.json-source
+                               41-edk2-ovmf-2m-raw-x64-sb.json-dest)
+                    (substitute* 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest
+                      (("/usr/share/edk2/ovmf/OVMF_(CODE|VARS).secboot.fd" _ kind)
+                       (string-append #$output "/share/firmware/ovmf_" (string-downcase kind) "_x64.secboot.bin")))
+                    (substitute* 41-edk2-ovmf-2m-raw-x64-sb.json-dest
+                      (("/usr/share/edk2/ovmf/OVMF_{CODE|VARS}.secboot.fd" _ kind)
+                       (string-append #$output "/share/firmware/ovmf_code_x64.secboot.bin")))
                     )))
               )))))))
