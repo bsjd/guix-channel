@@ -170,7 +170,6 @@ Executables included are:
                        (tools (string-append cwd "/BaseTools"))
                        (bin (string-append tools "/BinWrappers/PosixLike")))
                   (setenv "WORKSPACE" cwd)
-                  (setenv "BUILD_OPTIONS" "-D SECURE_BOOT_ENABLE")
                   (setenv "EDK_TOOLS_PATH" tools)
                   (setenv "PYTHON3_ENABLE" "TRUE")
                   (setenv "PYTHON_COMMAND" "python3")
@@ -201,7 +200,8 @@ Executables included are:
                                 "ArmVirtPkg/ArmVirtQemu.dsc")
                                ("riscv64"
                                 "OvmfPkg/RiscVVirt/RiscVVirtQemu.dsc")
-                               (_ #t)))))
+                               (_ #t))
+                        "-D" "SECURE_BOOT_ENABLE")))
             (add-before 'install 'install-efi-shell
               (lambda _
                 (let ((fmw (string-append #$output "/share/firmware")))
