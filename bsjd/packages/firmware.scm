@@ -240,7 +240,7 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
   (let ((base (make-ovmf-firmware "x86_64")))
     (package
       (inherit base)
-      (name "ovmf-x86-64")
+      (name "ovmf-secboot-x86-64")
       (arguments
        (substitute-keyword-arguments (package-arguments base)
          ((#:phases phases)
