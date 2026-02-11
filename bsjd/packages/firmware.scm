@@ -241,11 +241,11 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
   "Return as a gexp the auxiliary OVMF file corresponding to NAME."
   (local-file (search-path (%ovmf-files-path) name)))
 
-(define-public ovmf-secboot-x86-64
+(define-public ovmf-x86-64
   (let ((base (make-ovmf-firmware "x86_64")))
     (package
       (inherit base)
-      (name "ovmf-secboot-x86-64")
+      (name "ovmf-x86-64")
       (arguments
        (substitute-keyword-arguments (package-arguments base)
          ((#:phases phases)
@@ -272,21 +272,29 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
                   ;; Fedora project (see:
                   ;; https://src.fedoraproject.org/rpms/edk2/tree/rawhide).
                   (let ((31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-source #$(ovmf-local-file "31-edk2-ovmf-2m-raw-x64-sb-enrolled.json"))
-                        (31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest (string-append #$output "/share/qemu/firmware/" "31-edk2-ovmf-2m-raw-x64-sb-enrolled.json")))
+                        (31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest (string-append #$output "/share/qemu/firmware/" "31-edk2-ovmf-2m-raw-x64-sb-enrolled.json"))
                         (41-edk2-ovmf-2m-raw-x64-sb.json-source #$(ovmf-local-file "41-edk2-ovmf-2m-raw-x64-sb.json"))
-                        (41-edk2-ovmf-2m-raw-x64-sb.json-dest (string-append #$output "/share/qemu/firmware/41-edk2-ovmf-2m-raw-x64-sb.json")))
+                        (41-edk2-ovmf-2m-raw-x64-sb.json-dest (string-append #$output "/share/qemu/firmware/41-edk2-ovmf-2m-raw-x64-sb.json"))
+                        (51-edk2-ovmf-2m-raw-x64-nosb.json-source #$(ovmf-local-file "51-edk2-ovmf-2m-raw-x64-nosb.json"))
+                        (51-edk2-ovmf-2m-raw-x64-nosb.json-dest (string-append #$output "/share/qemu/firmware/51-edk2-ovmf-2m-raw-x64-nosb.json")))
                     (mkdir-p fmw)
                     (mkdir-p (dirname 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest))
                     (mkdir-p (dirname 41-edk2-ovmf-2m-raw-x64-sb.json-dest))
+                    (mkdir-p (dirname 51-edk2-ovmf-2m-raw-x64-nosb.json-dest))
                     (copy-file 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-source
                                31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest)
                     (copy-file 41-edk2-ovmf-2m-raw-x64-sb.json-source
                                41-edk2-ovmf-2m-raw-x64-sb.json-dest)
+                    (copy-file 51-edk2-ovmf-2m-raw-x64-nosb.json-source
+                               51-edk2-ovmf-2m-raw-x64-nosb.json-dest)
                     (substitute* 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest
                       (("/usr/share/edk2/ovmf/OVMF_(CODE|VARS).secboot.fd" _ kind)
                        (string-append #$output "/share/firmware/ovmf_" (string-downcase kind) "_x64.secboot.bin")))
                     (substitute* 41-edk2-ovmf-2m-raw-x64-sb.json-dest
                       (("/usr/share/edk2/ovmf/OVMF_{CODE|VARS}.secboot.fd" _ kind)
                        (string-append #$output "/share/firmware/ovmf_code_x64.secboot.bin")))
+                    (substitute* 51-edk2-ovmf-2m-raw-x64-nosb.json-dest
+                      (("/usr/share/edk2/ovmf/OVMF_{CODE|VARS}.fd" _ kind)
+                       (string-append #$output "/share/firmware/ovmf_code_x64.bin")))
                     )))
               )))))))
