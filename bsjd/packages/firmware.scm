@@ -254,8 +254,8 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
                   (let ((fmw (string-append #$output "/share/firmware")))
                     (mkdir-p fmw)
 
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_CODE.bin"      (string-append fmw "/ovmf_code_x64.fd"))
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS.bin"      (string-append fmw "/ovmf_vars_x64.fd"))
+                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_CODE.fd"      (string-append fmw "/ovmf_code_x64.fd"))
+                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS.fd"      (string-append fmw "/ovmf_vars_x64.fd"))
 
                     (copy-file #$(ovmf-local-file "edk2-x86_64-code.fd")        (string-append fmw "/edk2_ovmf_code_x64.fd"))
                     (copy-file #$(ovmf-local-file "edk2-i386-vars.fd")          (string-append fmw "/edk2_ovmf_vars_x64.fd"))
