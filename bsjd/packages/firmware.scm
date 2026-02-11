@@ -232,9 +232,14 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
       (license (list license:expat
                      license:bsd-2 license:bsd-3 license:bsd-4)))))
 
-(define (ovmf-aux-file name)
+(define %ovmf-files-path
+  (make-parameter
+   (map (cut string-append <> "/bsjd/packages/ovmf/")
+        %load-path)))
+
+(define (ovmf-local-file name)
   "Return as a gexp the auxiliary OVMF file corresponding to NAME."
-  (local-file (search-path ("/bsjd/packages/aux-files") (string-append "ovmf/" name))))
+  (local-file (search-path (%ovmf-files-path) name)))
 
 (define-public ovmf-secboot-x86-64
   (let ((base (make-ovmf-firmware "x86_64")))
@@ -266,10 +271,10 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
                   ;; The QEMU firmware metadata files are taken from the
                   ;; Fedora project (see:
                   ;; https://src.fedoraproject.org/rpms/edk2/tree/rawhide).
-                  (let ((31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-source #$(ovmf-aux-file "31-edk2-ovmf-2m-raw-x64-sb-enrolled.json"))
+                  (let ((31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-source #$(ovmf-local-file "31-edk2-ovmf-2m-raw-x64-sb-enrolled.json"))
                         (31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest (string-append #$output "/share/qemu/firmware/" "31-edk2-ovmf-2m-raw-x64-sb-enrolled.json")))
-                        ;(41-edk2-ovmf-2m-raw-x64-sb.json-source #$(ovmf-aux-file "41-edk2-ovmf-2m-raw-x64-sb.json"))
-                        ;(41-edk2-ovmf-2m-raw-x64-sb.json-dest (string-append #$output "/share/qemu/firmware/41-edk2-ovmf-2m-raw-x64-sb.json")))
+                        (41-edk2-ovmf-2m-raw-x64-sb.json-source #$(ovmf-local-file "41-edk2-ovmf-2m-raw-x64-sb.json"))
+                        (41-edk2-ovmf-2m-raw-x64-sb.json-dest (string-append #$output "/share/qemu/firmware/41-edk2-ovmf-2m-raw-x64-sb.json")))
                     (mkdir-p fmw)
                     (mkdir-p (dirname 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest))
                     (mkdir-p (dirname 41-edk2-ovmf-2m-raw-x64-sb.json-dest))
