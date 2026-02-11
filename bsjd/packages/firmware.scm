@@ -256,24 +256,13 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
                     (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS.fd" (string-append fmw "/ovmf_vars_x64.bin"))
 
                     (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_CODE.secboot.fd" (string-append fmw "/ovmf_code_x64.secboot.bin"))
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS.fd" (string-append fmw "/ovmf_vars_x64.secboot.bin"))
+                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS.fd"         (string-append fmw "/ovmf_vars_x64.secboot.bin"))
 
                     (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_CODE_4M.fd" (string-append fmw "/ovmf_code_4m_x64.bin"))
                     (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS_4M.fd" (string-append fmw "/ovmf_vars_4m_x64.bin"))
 
                     (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_CODE_4M.secboot.fd" (string-append fmw "/ovmf_code_4m_x64.secboot.bin"))
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS_4M.fd" (string-append fmw "/ovmf_code_4m_x64.secboot.bin"))
-
-                    (for-each
-                     (lambda (file)
-                       (copy-file
-                        (string-append "Build/OvmfX64/RELEASE_GCC"
-                                       "/FV/" file ".fd")
-                        (string-append fmw "/" (string-downcase file) "_x64.secboot.bin")))
-                     (list "OVMF"
-                           "OVMF_CODE"
-                           "OVMF_VARS"
-                           )))))
+                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS_4M.fd"         (string-append fmw "/ovmf_code_4m_x64.secboot.bin")))))
               (add-after 'install 'install-qemu-firmware-metadata
                 (lambda _
                   ;; The QEMU firmware metadata files are taken from the
