@@ -3,7 +3,6 @@
   #:use-module (guix memoization)
   #:use-module (guix deprecation)
   #:use-module (guix packages)
-  #:use-module (guix packages firmware)
   #:use-module (guix platform)
   #:use-module (guix download)
   #:use-module (guix gexp)
@@ -57,9 +56,7 @@
   #:use-module (gnu packages xml)
   #:use-module (ice-9 format)
   #:use-module (ice-9 match)
-  #:autoload (ice-9 pretty-print) (pretty-print)
   #:use-module (ice-9 regex)
-  #:autoload (ice-9 textual-ports) (get-string-all)
   #:use-module (srfi srfi-26))
 
 
