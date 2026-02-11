@@ -60,11 +60,10 @@
   #:use-module (ice-9 regex)
   #:use-module (srfi srfi-26))
 
-
 (define-public edk2-tools
   (package
     (name "edk2-tools")
-    (version "202511")
+    (version "202402")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -75,7 +74,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "1991qrkicxfj7q0rd373fv2v9shsjjnyqfi3l8akcw2nqz7y1yj7"))))
+                "0y7jfpijgi099znhzjklnsczn0k0vm1d1qznq9x2a2sa0glydsin"))))
     (build-system gnu-build-system)
     (arguments
      (list #:make-flags
@@ -134,7 +133,7 @@ Executables included are:
                            (_ "NONE"))))
     (package
       (inherit edk2-tools)
-      (name (string-append "edk2-ovmf-" arch))
+      (name (string-append "ovmf-" arch))
       (arguments
        (list
         #:tests? #f                     ; No check target.
@@ -187,8 +186,6 @@ Executables included are:
                              (number->string (parallel-job-count)))))
                   ;; Build build support.
                   (setenv "CC" "gcc")
-                  (setenv "SECURE_BOOT_ENABLE" "TRUE")
-                  (setenv "BUILD_OPTIONS" "-D SECURE_BOOT_ENABLE")
                   (invoke "make" "-C" tools))))
             (replace 'build
               (lambda _
@@ -234,14 +231,6 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
       (license (list license:expat
                      license:bsd-2 license:bsd-3 license:bsd-4)))))
 
-(define %ovmf-files-path
-  (make-parameter
-   (map (cut string-append <> "/bsjd/packages/ovmf/")
-        %load-path)))
-
-(define (ovmf-local-file name)
-  "Return as a gexp the auxiliary OVMF file corresponding to NAME."
-  (local-file (search-path (%ovmf-files-path) name)))
 
 (define-public edk2-ovmf-x86-64
   (let ((base (make-ovmf-firmware "x86_64")))
@@ -257,17 +246,14 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
                   (let ((fmw (string-append #$output "/share/firmware")))
                     (mkdir-p fmw)
 
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_CODE.fd" (string-append fmw "/ovmf_code_x64.bin"))
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS.fd" (string-append fmw "/ovmf_vars_x64.bin"))
+                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_CODE.fd"      (string-append fmw "/ovmf_code_x64.fd"))
+                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS.fd"      (string-append fmw "/ovmf_vars_x64.fd"))
 
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_CODE.secboot.fd" (string-append fmw "/ovmf_code_x64.secboot.bin"))
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS.fd"         (string-append fmw "/ovmf_vars_x64.secboot.bin"))
+                    (copy-file #$(ovmf-local-file "edk2-x86_64-code.fd")        (string-append fmw "/edk2_ovmf_code_x64.fd"))
+                    (copy-file #$(ovmf-local-file "edk2-i386-vars.fd")          (string-append fmw "/edk2_ovmf_vars_x64.fd"))
 
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_CODE_4M.fd" (string-append fmw "/ovmf_code_4m_x64.bin"))
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS_4M.fd" (string-append fmw "/ovmf_vars_4m_x64.bin"))
-
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_CODE_4M.secboot.fd" (string-append fmw "/ovmf_code_4m_x64.secboot.bin"))
-                    (copy-file "Build/OvmfX64/RELEASE_GCC/FV/OVMF_VARS_4M.fd"         (string-append fmw "/ovmf_code_4m_x64.secboot.bin")))))
+                    (copy-file #$(ovmf-local-file "edk2-x86_64-secure-code.fd") (string-append fmw "/edk2_ovmf_code_x64.secboot.fd"))
+                    (copy-file #$(ovmf-local-file "edk2-i386-vars.fd")          (string-append fmw "/edk2_ovmf_vars_x64.secboot.fd")))))
               (add-after 'install 'install-qemu-firmware-metadata
                 (lambda _
                   ;; The QEMU firmware metadata files are taken from the
@@ -291,12 +277,12 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
                                51-edk2-ovmf-2m-raw-x64-nosb.json-dest)
                     (substitute* 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest
                       (("/usr/share/edk2/ovmf/OVMF_(CODE|VARS).secboot.fd" _ kind)
-                       (string-append #$output "/share/firmware/ovmf_" (string-downcase kind) "_x64.secboot.bin")))
+                       (string-append #$output "/share/firmware/edk2_ovmf_" (string-downcase kind) "_x64.secboot.fd")))
                     (substitute* 41-edk2-ovmf-2m-raw-x64-sb.json-dest
                       (("/usr/share/edk2/ovmf/OVMF_{CODE|VARS}.secboot.fd" _ kind)
-                       (string-append #$output "/share/firmware/ovmf_code_x64.secboot.bin")))
+                       (string-append #$output "/share/firmware/edk2_ovmf_" (string-downcase kind) "_x64.secboot.fd")))
                     (substitute* 51-edk2-ovmf-2m-raw-x64-nosb.json-dest
                       (("/usr/share/edk2/ovmf/OVMF_{CODE|VARS}.fd" _ kind)
-                       (string-append #$output "/share/firmware/ovmf_code_x64.bin")))
+                       (string-append #$output "/share/firmware/edk2_ovmf_" (string-downcase kind) "_x64.fd")))
                     )))
               )))))))
