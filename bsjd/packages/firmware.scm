@@ -187,6 +187,8 @@ Executables included are:
                              (number->string (parallel-job-count)))))
                   ;; Build build support.
                   (setenv "CC" "gcc")
+                  (setenv "SECURE_BOOT_ENABLE" "TRUE")
+                  (setenv "BUILD_OPTIONS" "-D SECURE_BOOT_ENABLE")
                   (invoke "make" "-C" tools))))
             (replace 'build
               (lambda _
@@ -200,8 +202,7 @@ Executables included are:
                                 "ArmVirtPkg/ArmVirtQemu.dsc")
                                ("riscv64"
                                 "OvmfPkg/RiscVVirt/RiscVVirtQemu.dsc")
-                               (_ #t))
-                        "-D" "SECURE_BOOT_ENABLE")))
+                               (_ #t)))))
             (add-before 'install 'install-efi-shell
               (lambda _
                 (let ((fmw (string-append #$output "/share/firmware")))
