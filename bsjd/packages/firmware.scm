@@ -134,7 +134,7 @@ Executables included are:
                            (_ "NONE"))))
     (package
       (inherit edk2-tools)
-      (name (string-append "ovmf-" arch))
+      (name (string-append "edk2-ovmf-" arch))
       (arguments
        (list
         #:tests? #f                     ; No check target.
