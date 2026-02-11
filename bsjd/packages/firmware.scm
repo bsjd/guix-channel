@@ -43,6 +43,7 @@
   #:use-module (gnu packages man)
   #:use-module (gnu packages mingw)
   #:use-module (gnu packages package-management)
+  #:use-module (gnu packages perl)
   #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages polkit)
   #:use-module (gnu packages protobuf)
