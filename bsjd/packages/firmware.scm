@@ -170,6 +170,7 @@ Executables included are:
                        (tools (string-append cwd "/BaseTools"))
                        (bin (string-append tools "/BinWrappers/PosixLike")))
                   (setenv "WORKSPACE" cwd)
+                  (setenv "BUILD_OPTIONS" "-D SECURE_BOOT_ENABLE")
                   (setenv "EDK_TOOLS_PATH" tools)
                   (setenv "PYTHON3_ENABLE" "TRUE")
                   (setenv "PYTHON_COMMAND" "python3")
