@@ -132,4 +132,4 @@
                     (substitute* 41-edk2-ovmf-2m-raw-x64-sb.json-dest
                       (("/usr/share/edk2/ovmf/OVMF_VARS.fd" _ kind)
                        (string-append #$output "/share/firmware/ovmf_vars_x64.bin")))
-                    ))))))))))
+                    )))))))))))
