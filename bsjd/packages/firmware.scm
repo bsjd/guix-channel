@@ -231,6 +231,14 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
       (license (list license:expat
                      license:bsd-2 license:bsd-3 license:bsd-4)))))
 
+(define %ovmf-files-path
+  (make-parameter
+   (map (cut string-append <> "/bsjd/packages/ovmf/")
+        %load-path)))
+
+(define (ovmf-local-file name)
+  "Return as a gexp the auxiliary OVMF file corresponding to NAME."
+  (local-file (search-path (%ovmf-files-path) name)))
 
 (define-public edk2-ovmf-x86-64
   (let ((base (make-ovmf-firmware "x86_64")))
@@ -265,7 +273,6 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
                         (41-edk2-ovmf-2m-raw-x64-sb.json-dest (string-append #$output "/share/qemu/firmware/41-edk2-ovmf-2m-raw-x64-sb.json"))
                         (51-edk2-ovmf-2m-raw-x64-nosb.json-source #$(ovmf-local-file "51-edk2-ovmf-2m-raw-x64-nosb.json"))
                         (51-edk2-ovmf-2m-raw-x64-nosb.json-dest (string-append #$output "/share/qemu/firmware/51-edk2-ovmf-2m-raw-x64-nosb.json")))
-                    (mkdir-p fmw)
                     (mkdir-p (dirname 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest))
                     (mkdir-p (dirname 41-edk2-ovmf-2m-raw-x64-sb.json-dest))
                     (mkdir-p (dirname 51-edk2-ovmf-2m-raw-x64-nosb.json-dest))
