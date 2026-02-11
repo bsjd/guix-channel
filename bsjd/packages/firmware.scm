@@ -266,16 +266,15 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
                   ;; The QEMU firmware metadata files are taken from the
                   ;; Fedora project (see:
                   ;; https://src.fedoraproject.org/rpms/edk2/tree/rawhide).
-                  (let ((fmw (string-append #$output "/share/firmware"))
-                        (31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-source #$(ovmf-aux-file "31-edk2-ovmf-2m-raw-x64-sb-enrolled.json"))
-                        (31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest (string-append #$output "/share/qemu/firmware/" "31-edk2-ovmf-2m-raw-x64-sb-enrolled.json"))
-                        (41-edk2-ovmf-2m-raw-x64-sb.json-source #$(ovmf-aux-file "41-edk2-ovmf-2m-raw-x64-sb.json"))
-                        (41-edk2-ovmf-2m-raw-x64-sb.json-dest (string-append #$output "/share/qemu/firmware/41-edk2-ovmf-2m-raw-x64-sb.json")))
+                  (let ((31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-source #$(ovmf-aux-file "31-edk2-ovmf-2m-raw-x64-sb-enrolled.json"))
+                        (31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest (string-append #$output "/share/qemu/firmware/" "31-edk2-ovmf-2m-raw-x64-sb-enrolled.json")))
+                        ;(41-edk2-ovmf-2m-raw-x64-sb.json-source #$(ovmf-aux-file "41-edk2-ovmf-2m-raw-x64-sb.json"))
+                        ;(41-edk2-ovmf-2m-raw-x64-sb.json-dest (string-append #$output "/share/qemu/firmware/41-edk2-ovmf-2m-raw-x64-sb.json")))
                     (mkdir-p fmw)
-                    ; (mkdir-p (dirname 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest))
-                    ; (mkdir-p (dirname 41-edk2-ovmf-2m-raw-x64-sb.json-dest))
-                    ; (copy-file 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-source
-                    ;            31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest)
+                    (mkdir-p (dirname 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest))
+                    ;  (mkdir-p (dirname 41-edk2-ovmf-2m-raw-x64-sb.json-dest))
+                    (copy-file 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-source
+                               31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest)
                     ; (copy-file 41-edk2-ovmf-2m-raw-x64-sb.json-source
                     ;            41-edk2-ovmf-2m-raw-x64-sb.json-dest)
                     ; (substitute* 31-edk2-ovmf-2m-raw-x64-sb-enrolled.json-dest
