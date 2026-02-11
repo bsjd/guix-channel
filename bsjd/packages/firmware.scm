@@ -64,7 +64,7 @@
 (define-public edk2-tools
   (package
     (name "edk2-tools")
-    (version "202402")
+    (version "202511")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -75,7 +75,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0y7jfpijgi099znhzjklnsczn0k0vm1d1qznq9x2a2sa0glydsin"))))
+                "1lsdy312hhb87rsgyvr4x70sq9hfhqcrkyapswbfmngv98sb06fr"))))
     (build-system gnu-build-system)
     (arguments
      (list #:make-flags
@@ -234,7 +234,7 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
 
 (define (ovmf-aux-file name)
   "Return as a gexp the auxiliary OVMF file corresponding to NAME."
-  (local-file (search-auxiliary-file (string-append "ovmf/" name))))
+  (local-file (search-path ("/bsjd/packages/aux-files") (string-append "ovmf/" name))))
 
 (define-public ovmf-secboot-x86-64
   (let ((base (make-ovmf-firmware "x86_64")))
