@@ -8,11 +8,11 @@
 (define-public basedpyright
   (package
     (name "basedpyright")
-    (version "1.37.4")
+    (version "1.36.2")
     (source
       (origin
         (method url-fetch)
-        (uri "https://registry.npmjs.org/basedpyright/-/basedpyright-1.37.4.tgz")
+        (uri "https://registry.npmjs.org/basedpyright/-/basedpyright-1.36.2.tgz")
         (sha256
           (base32 "1dq7y6kvvjsk2n8g5pifvibg90agiy025d9yqpk28pxjsa60z9ih"))))
     (build-system node-build-system)
