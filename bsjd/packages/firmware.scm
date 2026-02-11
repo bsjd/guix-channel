@@ -295,9 +295,5 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
                         #$output "/share/firmware/ovmf_"
                         (string-downcase kind) "_x64.secboot.bin")))
                     (substitute* 41-edk2-ovmf-2m-raw-x64-sb.json-dest
-                      (("/usr/share/edk2/ovmf/OVMF_CODE.secboot.fd" _ kind)
-                       (string-append #$output "/share/firmware/ovmf_code_x64.secboot.bin")))
-                    (substitute* 41-edk2-ovmf-2m-raw-x64-sb.json-dest
-                      (("/usr/share/edk2/ovmf/OVMF_VARS.fd" _ kind)
-                       (string-append #$output "/share/firmware/ovmf_vars_x64.bin")))
-                    ))))))))))
+                      (("/usr/share/edk2/ovmf/OVMF_{CODE|VARS}.secboot.fd" _ kind)
+                       (string-append #$output "/share/firmware/ovmf_code_x64.secboot.bin")))))))))))))
