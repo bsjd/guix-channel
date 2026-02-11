@@ -241,11 +241,11 @@ Virtual Machines.  OVMF contains a sample UEFI firmware for QEMU and KVM.")
   "Return as a gexp the auxiliary OVMF file corresponding to NAME."
   (local-file (search-path (%ovmf-files-path) name)))
 
-(define-public ovmf-edk-x86-64
+(define-public edk2-ovmf-x86-64
   (let ((base (make-ovmf-firmware "x86_64")))
     (package
       (inherit base)
-      (name "ovmf-edk-x86-64")
+      (name "edk2-ovmf-x86-64")
       (arguments
        (substitute-keyword-arguments (package-arguments base)
          ((#:phases phases)
